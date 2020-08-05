@@ -29,26 +29,7 @@ export class RepublicaPage implements OnInit {
   }
 
   ngOnInit() {
-    this.comments = [{
-      id: 1,
-      username: 'Kujo Jotaro',
-      text: 'Oraoraoraoraoraoraororaoraoraoraoroaroarraoao!'
-    },
-    {
-      id: 2,
-      username: 'Josuke Higashikata',
-      text: 'Dorarararararararararararara!'
-    },
-    {
-      id: 3,
-      username: 'Joseph Joestar',
-      text: 'Oh my god!!!'
-    },
-    {
-      id: 4,
-      username: 'Giorno Giovanna',
-      text: 'Mudamudamudamudamudamudamuda!'
-    }];
+    this.getRepublicWithComments(this.republic_id);
   }
 
   sendComment(form){
@@ -80,4 +61,15 @@ export class RepublicaPage implements OnInit {
     console.log('Mais que cancelado: ' + id);
   }
 
+  getRepublicWithComments(id) {
+    this.commentService.showRepublicWithComments(id).subscribe(
+      (res) => {
+        this.republic = res.republic;
+        this.comments = res.comments;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
 }
