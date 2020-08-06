@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Observer } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +16,13 @@ export class CommentService {
 
   showRepublicWithComments(id): Observable<any> {
     return this.http.get(this.apiURL + 'showRepublicWithComments/' + id);
+  }
+
+  updateComment(id, form): Observable<any> {
+    return this.http.put(this.apiURL + 'updateComment/' + id, form);
+  }
+
+  deleteComment(id): Observable<any> {
+    return this.http.delete(this.apiURL + 'deleteComment/' + id);
   }
 }

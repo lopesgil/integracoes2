@@ -14,9 +14,10 @@ export class RepublicaPage implements OnInit {
   editMode = false;
 
   republic = JSON.parse(localStorage.getItem('republica'));
-  republic_id = this.republic.id;
+  republicId = this.republic.id;
   username = localStorage.getItem('username');
   comments = [];
+  commentId: number;
 
   constructor( public formbuilder: FormBuilder,
                public commentService: CommentService ) {
@@ -29,13 +30,13 @@ export class RepublicaPage implements OnInit {
   }
 
   ngOnInit() {
-    this.getRepublicWithComments(this.republic_id);
+    this.getRepublicWithComments(this.republicId);
   }
 
   sendComment(form){
     console.log(form);
     console.log(form.value);
-    form.value.republic_id = this.republic_id;
+    form.value.republic_id = this.republicId;
     form.value.username = this.username;
     this.commentService.createComment(form.value).subscribe(
       (res) => {
@@ -49,11 +50,20 @@ export class RepublicaPage implements OnInit {
   sendEditComment(form){
     console.log(form);
     console.log(form.value);
+    this.commentService.updateComment(this.commentId, form.value).subscribe(
+      (res) => {
+        console.log(res);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
     this.editMode = false;
   }
 
   toggleEdit(id){
     this.editMode = true;
+    this.commentId = id;
     console.log(id)
   }
 

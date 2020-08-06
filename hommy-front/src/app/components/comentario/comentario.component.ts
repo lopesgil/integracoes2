@@ -11,7 +11,7 @@ export class ComentarioComponent implements OnInit {
     if(!localStorage.getItem('username')){
       localStorage.setItem('username', '');
     }
-    return user == localStorage.getItem('username');
+    return user === localStorage.getItem('username');
   }
 
   @Input() comentario;
