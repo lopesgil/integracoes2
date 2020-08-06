@@ -71,6 +71,15 @@ export class RepublicaPage implements OnInit {
 
   deleteComment(id){
     console.log('Mais que cancelado: ' + id);
+    this.commentService.deleteComment(id).subscribe(
+      (res) => {
+        console.log(res);
+        this.getRepublicWithComments(this.republicId);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   getRepublicWithComments(id) {
