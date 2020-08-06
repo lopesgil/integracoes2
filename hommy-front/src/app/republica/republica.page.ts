@@ -41,6 +41,7 @@ export class RepublicaPage implements OnInit {
     this.commentService.createComment(form.value).subscribe(
       (res) => {
         console.log(res);
+        this.getRepublicWithComments(this.republicId);
       },
       (err) => {
         console.log(err);
@@ -53,6 +54,7 @@ export class RepublicaPage implements OnInit {
     this.commentService.updateComment(this.commentId, form.value).subscribe(
       (res) => {
         console.log(res);
+        this.getRepublicWithComments(this.republicId);
       },
       (err) => {
         console.log(err);
